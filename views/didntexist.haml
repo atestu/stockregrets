@@ -1,0 +1,25 @@
+!!! XML
+!!!
+%html
+	%head
+		%link(rel="stylesheet"
+		href="/style.css"
+		type="text/css"
+		media="screen"
+		title="no title"
+		charset="utf-8")
+		%meta(name="viewport"
+		content="width=320, user-scalable=yes")
+		%title 
+			Uh oh…
+	%body
+		%h1
+			Err… it looks like
+			%a{:href => "http://finance.yahoo.com/q?s=" + @ticker}<
+				= params[:name]
+			didn't exist in 
+			= params[:year]
+			so… you couldn't have bought it.
+			
+		%h2
+			%a{:title => "Try another one", :href => "/"} Try another one or change the year.
