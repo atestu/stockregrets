@@ -1,0 +1,22 @@
+!!! XML
+!!!
+%html
+	%head
+		%link(rel="stylesheet"
+		href="/style.css"
+		type="text/css"
+		media="screen"
+		title="no title"
+		charset="utf-8")
+		%meta(name="viewport"
+		content="width=320, user-scalable=yes")
+		%title 
+			Need some plutonium?
+	%body
+		%h1
+			Hold on mate… 
+			= params[:year]
+			is in the future! You wanna 
+			%a{:title => "Try another one", :href => "/"}
+				try a year that's before
+				= Date::today.year
