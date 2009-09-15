@@ -1,0 +1,55 @@
+body {
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	padding: 70px;
+}
+
+#head {
+	font-weight: bold;
+	font-size: 50px;
+	position: absolute;
+	top: 50px;
+}
+
+#input {
+	height: 28px;
+	margin-bottom: 10px;	position: relative;
+	font: bold 28px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	text-align: right;
+}
+
+#button {
+	visibility: hidden;
+}
+
+form {
+	padding-top: 60px;
+}
+
+h1 a {
+	color: black;
+	margin-top: 200px;
+}
+
+h2 {
+	color: silver;
+}
+
+h2 a {
+	color: silver;
+}
+
+h2 a:hover {
+	color: black;
+}
+
+h3 {
+	text-align: right;
+}
+
+h3 a {
+	color: black;
+}
+
+h3 a:hover {
+	color: black;
+}

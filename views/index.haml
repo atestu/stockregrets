@@ -1,0 +1,46 @@
+!!! XML
+!!!
+%html
+	%head
+		%link(rel="stylesheet"
+		href="/style.css"
+		type="text/css"
+		media="screen"
+		title="no title"
+		charset="utf-8")
+		%title 
+			Stock Regrets
+	%body
+		%div{:id => "head"}
+			Stock
+			%font{:color => "red"}> Regrets
+		%h2
+			Don't you wish you had bought some of that stock?
+		%h1
+			%form(action="/"
+			method="POST")
+				I wish I had bought
+				%input(type="text"
+				id="input"
+				name="dollars"
+				size="6"
+				placeholder="4200")
+				US Dollars worth of
+				%input(type="text"
+				id="input"
+				name="name"
+				size="5"
+				placeholder="AAPL")
+				
+				back in 
+				%input(type="text"
+				id="input"
+				name="year"
+				size="4"
+				placeholder="1994")
+				
+				%input(type="submit"
+				id="button"
+				value="I'd have…")
+		%h2
+			Fill in the blanks and press "enter"

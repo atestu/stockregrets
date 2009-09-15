@@ -1,0 +1,42 @@
+!!! XML
+!!!
+%html
+	%head
+		%link(rel="stylesheet"
+		href="/style.css"
+		type="text/css"
+		media="screen"
+		title="no title"
+		charset="utf-8")
+		%title 
+			You'd have 
+			= @moneyYouWouldHave
+			dollars.
+	%body
+		%h1
+			If you had bought
+			= params[:dollars]
+			dollars worth of
+			%a{:href => "http://finance.yahoo.com/q?s=" + @ticker}<
+				= params[:name]
+			\ back in 
+			= params[:year]
+			you'd have
+			= @moneyYouWouldHave
+			dollars by now.
+			
+		%h2
+			A share of
+			= params[:name]
+			was worth
+			= @formerPricePerShare
+			dollars back then, but today
+			it's worth
+			= @currentPricePerShare
+			dollars.
+			
+		%h2
+			%a{:title => "Try another one", :href => "/"} Try another one.
+			
+		%h3
+			%a{:title => "Share on Twitter", :href => @twitterStatus} tweet this &#8594;
