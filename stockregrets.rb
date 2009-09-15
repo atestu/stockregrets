@@ -15,9 +15,15 @@ get '/:dollars/:name/:day/:month/:year' do
   @formerPricePerShare = (docBackThen/"nobr").first.inner_html.to_i
   @currentPricePerShare = (docNow/"nobr").first.inner_html.to_i
   @moneyYouWouldHave = params[:dollars].to_i() * @currentPricePerShare / @formerPricePerShare
-  
+
   @href = "/#{params[:dollars]}/#{@ticker}/#{params[:day]}/#{params[:month]}/#{params[:year]}"
-  @twitterStatus = "http://twitter.com/?status=" + "http://localhost:4567" + @href + " via @stockregrets"
+  docBitly = open("http://api.bit.ly/shorten?version=2.0.1&format=xml&longUrl=http://stockregrets.heroku.com" + @href + "&login=atestu&apiKey=R_de497f5fbf142ef6393e5ac94359ae18") { |f| Hpricot(f) }
+  @bitly = (docBitly/"shortUrl").first.inner_html
+  if @bitly.nil?
+    @bitly = @href
+  end
+
+  @twitterStatus = "http://twitter.com/?status=" + @bitly + " via @stockregrets"
   haml :prices
 end
 
