@@ -4,7 +4,7 @@ require 'hpricot'
 require 'open-uri'
 require 'haml'
 
-#  , :proxy => "http://158.50.136.94:80/"
+#   , :proxy => "http://158.50.136.94:80/"
 
 get '/:dollars/:name/:year' do
   docName = open("http://finance.yahoo.com/q?s=#{params[:name].gsub(" ", "%20")}") { |f| Hpricot(f) }
@@ -33,7 +33,7 @@ get '/:dollars/:name/:year' do
     docBackThen = open("http://bigcharts.marketwatch.com/historical/default.asp?detect=1&symbol=#{@ticker}&close_date=2%2F3%2F#{params[:year]}&x=26&y=31"  ) { |f| Hpricot(f) }
   end
   if ((docBackThen/"nobr").first.inner_html.to_i == 0)
-    if Date::today.year > :year
+    if Date::today.year > :year.to_i
       haml :didntexist
     else
       haml :bttf
