@@ -7,9 +7,10 @@ StockRegrets is a small webapp written in Ruby using [Sinatra](http://www.sinatr
 
 I just wanted to create a simple application and deploy it really fast. It's hosted by [Heroku](http://heroku.com/), a service I strongly recommend.
 
---
 
 Bugs & Stuff
 ------------
 
-The application is far from complete at the moment, so if you find any bug (they're probably not hard to find), please contact me on twitter at [@stockregrets](http://twitter.com/stockregrets), or send me a message on GitHub.
+The application is far from complete at the moment, so if you find any bug (they're probably not hard to find), please [create an "issue"](http://github.com/atestu/stockregrets/issues).
+
+Alternatively, you can contact me on twitter at [@stockregrets](http://twitter.com/stockregrets), or send me a message on GitHub.

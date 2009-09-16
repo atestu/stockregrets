@@ -52,6 +52,7 @@ h2 a:hover {
 }
 
 h3 {
+	padding-right: 10%;
 	text-align: right;
 }
 
@@ -60,5 +61,14 @@ h3 a {
 }
 
 h3 a:hover {
+	color: black;
+}
+
+h4 a {
+	padding-left: 5%;
+	color: silver;
+}
+
+h4 a:hover {
 	color: black;
 }
