@@ -55,11 +55,15 @@ get '/:dollars/:name/:year' do
   end
 end
 
-get '/0/*/' do
+get '//*/*' do
   redirect "/"
 end
 
-get '/0//*' do
+get '/*/*/' do
+  redirect "/"
+end
+
+get '/*//*' do
   redirect "/"
 end
 
