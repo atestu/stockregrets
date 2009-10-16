@@ -21,8 +21,7 @@ h2, h1, #head {
 #input {
 	height: 28px;
 	margin-bottom: 10px;
-	position: relative;
-	font: bold 28px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font: bold 26px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	text-align: right;
 }
 
