@@ -7,14 +7,14 @@ body {
 
 
 h2, h1, #head {
-	padding-left: 5%;
-	padding-right: 5%;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 #head {
 	font-weight: bold;
 	font-size: 50px;
-	top: 5%;
+	top: 30px;
 	position: absolute;
 }
 
