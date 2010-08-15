@@ -41,4 +41,16 @@
 			%a{:title => "Try another one", :href => "/"} Try another one.
 			
 		%h3
-			%a{:title => "Share on Twitter", :href => @twitterStatus} tweet this &#8594;
+			%script{ :src => "http://platform.twitter.com/widgets.js", :type => "text/javascript" }
+			%div
+				%a{:href => "http://twitter.com/share?text=If I had bought #{params[:dollars]} dollars worth of $#{@ticker} back in #{params[:year]} I'd have #{@moneyYouWouldHave} dollars by now.&amp;via=stockregrets&amp;url=http://stockregrets.heroku.com&amp;count=none&amp;data-related=atestu", :class => "twitter-share-button"}
+					tweet this
+			
+			
+			
+			
+			
+			
+			
+			
+			
