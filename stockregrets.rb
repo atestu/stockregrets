@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra'
+require 'date'
 require 'hpricot'
 require 'open-uri'
 require 'haml'
@@ -9,10 +10,10 @@ require 'haml'
 get '/:dollars/:name/:year' do
   docName = open("http://finance.yahoo.com/q?s=#{params[:name].gsub(" ", "%20")}") { |f| Hpricot(f) }
   @ticker = (docName/"title").first.inner_html.split(':')[0]
-  docBackThen = open("http://bigcharts.marketwatch.com/historical/default.asp?detect=1&symbol=#{@ticker}&close_date=2%2F7%2F#{params[:year]}&x=26&y=31"  ) { |f| Hpricot(f) }
-  docNow = open("http://bigcharts.marketwatch.com/historical/default.asp?detect=1&symbol=#{@ticker}&close_date=#{Date::today.mon()}%2F#{Date::today.day()}%2F#{Date::today.year()}&x=26&y=31"  ) { |f| Hpricot(f) }
-
-  if ((docNow/"nobr").first.inner_html.to_i == 0)
+  docBackThen = open("http://bigcharts.marketwatch.com/historical/default.asp?symb=#{@ticker}&closeDate=2%2F7%2F#{params[:year]}"  ) { |f| Hpricot(f) }
+  docNow = open("http://bigcharts.marketwatch.com/historical/default.asp?&symb=#{@ticker}&closeDate=#{Date.today.mon()}%2F#{Date.today.day()}%2F#{Date.today.year()}"  ) { |f| Hpricot(f) }
+puts "http://bigcharts.marketwatch.com/historical/default.asp?&symb=#{@ticker}&closeDate=#{Date.today.mon()}%2F#{Date.today.day()}%2F#{Date.today.year()}"
+  if ((docNow/"td")[4].inner_html.to_i == 0)
     if (Date::today.day <= 6)
       day = 28
       if (Date::today.month == 1)
@@ -27,30 +28,23 @@ get '/:dollars/:name/:year' do
       month = Date::today.month
       year = Date::today.year
     end
-    docNow = open("http://bigcharts.marketwatch.com/historical/default.asp?detect=1&symbol=#{@ticker}&close_date=#{month}%2F#{day}%2F#{year}&x=26&y=31"  ) { |f| Hpricot(f) }
+    docNow = open("http://bigcharts.marketwatch.com/historical/default.asp?detect=1&symb=#{@ticker}&closeDate=#{month}%2F#{day}%2F#{year}"  ) { |f| Hpricot(f) }
   end
-  if ((docBackThen/"nobr").first.inner_html.to_i == 0)
-    docBackThen = open("http://bigcharts.marketwatch.com/historical/default.asp?detect=1&symbol=#{@ticker}&close_date=2%2F3%2F#{params[:year]}&x=26&y=31"  ) { |f| Hpricot(f) }
+  if ((docBackThen/"td")[4].inner_html.to_i == 0)
+    docBackThen = open("http://bigcharts.marketwatch.com/historical/default.asp?detect=1&symb=#{@ticker}&closeDate=2%2F3%2F#{params[:year]}"  ) { |f| Hpricot(f) }
   end
-  if ((docBackThen/"nobr").first.inner_html.to_i == 0)
+  if ((docBackThen/"td")[4].inner_html.to_i == 0)
     if Date::today.year > params[:year].to_i
       haml :didntexist
     else
       haml :bttf
     end
   else
-    @formerPricePerShare = (docBackThen/"nobr").first.inner_html.to_i
-    @currentPricePerShare = (docNow/"nobr").first.inner_html.to_i
+    @formerPricePerShare = (docBackThen/"td")[4].inner_html.to_i
+    @currentPricePerShare = (docNow/"td")[4].inner_html.to_i
     @moneyYouWouldHave = params[:dollars].to_i() * @currentPricePerShare / @formerPricePerShare
-    
-    @href = "/#{params[:dollars]}/#{@ticker}/#{params[:year]}"
-    docBitly = open("http://api.bit.ly/shorten?version=2.0.1&format=xml&longUrl=http://stockregrets.heroku.com" + @href + "&login=atestu&apiKey=R_de497f5fbf142ef6393e5ac94359ae18" ) { |f| Hpricot::XML(f) }
-    @bitly = (docBitly/"shortUrl").first.inner_html
-    if @bitly.nil?
-      @bitly = "http://stockregrets.heroku.com/" + @href
-    end
-    
-    @twitterStatus = "http://twitter.com/?status=" + @bitly + " (via @stockregrets)"
+
+    @twitterStatus = "http://twitter.com/?status=http://stockregrets.heroku.com/#{params[:dollars]}/#{@ticker}/#{params[:year]} (via @stockregrets)"
     haml :prices
   end
 end
